@@ -1,0 +1,35 @@
+/* circle.textbackground{
+    fill: blue;
+}; */
+
+@keyframes inst {
+
+    0%{
+        top: -20px;
+        left: -330px;
+    }
+    50%{
+        top: -20px;
+        left: -70px;
+    }
+
+}
+
+.dot:before{
+    content: "8";
+    padding-left: 5px;
+}
+
+.dot{
+    height: 25px;
+    width: 25px;
+    background-color:blue;
+    border: 1px solid black;
+    border-radius: 50%;
+    top: -20px;
+    left: -70px;
+    position: relative;
+    display: inline-block;
+    animation-name: inst;
+    animation-duration: 5s;
+}

@@ -1,0 +1,106 @@
+
+<div #container>
+    <ngx-graph #ngxgraph class="chart-container" [panningEnabled]="false" [enableZoom]="false" [draggingEnabled]="false"
+        [view]="view" (window:resize)="onResize($event)" [links]="edge" [nodes]="node" layout="dagre"  [curve]="curve" [center$]="center$">
+        <ng-template #defsTemplate>
+            <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4"
+                orient="auto">
+                <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
+            </svg:marker>
+        </ng-template>
+        <ng-template #nodeTemplate let-node>
+            <svg *ngIf="node.data.shape == 'rect_'">
+                <g>
+                    <rect width="100" height="50" fill="blue" />
+                    <text alignment-baseline="central" [attr.x]="10" [attr.y]="node.dimension.height / 2">{{node.label}}
+                    </text>
+                </g>
+            </svg>
+            <svg *ngIf="node.data.shape == 'circle'" viewBox="auto auto auto auto" preserveAspectRatio="xMidYMid meet" (window:resize)="resize($event)">
+                <g>
+                    <circle [attr.r]="y" [attr.cx]="y"
+                        [attr.cy]="y" fill="red" stroke="black" stroke-width="2" />
+                    <text alignment-baseline="central" [attr.x]="y/3.5" 
+                    [attr.y]="node.dimension.height / 2" [attr.font-size]="y/2.5">
+                        {{node.label}}
+                    </text>
+                </g>
+            </svg>
+            <svg
+                *ngIf="node.data.shape == 'rect'  ||  node.data.shape == 'rect' || 
+                node.data.shape == 'rect' || node.data.shape == 'rect'">
+                <g>
+                    <rect width="70" height="50" fill="blue" />
+                    <text alignment-baseline="central" [attr.x]="10"
+                        [attr.y]="node.dimension.height / 2">{{node.label}}</text>
+                </g>
+            </svg>
+            <svg *ngIf="  node.data.shape == 'oval' || node.data.shape == 'oval' || node.data.shape == 'oval' ">
+                <g>
+                    <ellipse rx="40" ry="25" [attr.cx]="node.dimension.width/1.5 " [attr.cy]="node.dimension.height / 2"
+                        fill="green" stroke="yellow" stroke-width="2" />
+                    <text alignment-baseline="central" [attr.x]="10"
+                        [attr.y]="node.dimension.height / 2">{{node.label}}</text>
+                </g>
+            </svg>
+            <svg *ngIf="node.data.shape == 'message' ||  node.data.shape == 'message'">
+                <g>
+                    <path
+                        d="M21.25,42.5 C9.53,42.5,0,32.97,0,21.25 C0,9.53,9.53,0,21.25,0 C32.97,0,42.5,9.53,42.5,21.25 C42.5,32.97,32.97,42.5,21.25,42.5 "
+                        opacity="1" stroke="black" stroke-width="1" fill="white">
+                    </path>
+
+
+                    <path d="M0,0 L13,9.5 L24.5,0 L0,0 L0,18 L25,18 L25,0 " visibility="visible" opacity="1"
+                        transform="translate(8.5,11)" stroke="black" stroke-width="1" stroke-dasharray="none"
+                        fill="white"></path>
+                </g>
+            </svg>
+            <svg *ngIf="node.data.shape == 'time'">
+                <g>
+                    <path
+                        d="M21.25,42.5 C9.53,42.5,0,32.97,0,21.25 C0,9.53,9.53,0,21.25,0 C32.97,0,42.5,9.53,42.5,21.25 C42.5,32.97,32.97,42.5,21.25,42.5 "
+                        opacity="1" stroke="black" stroke-width="1" fill="white"></path>
+                    <path
+                        d="M25,12.5 C25,17.91,21.56,22.52,16.76,24.26 C15.43,24.74,13.99,25,12.5,25 C5.6,25,0,19.4,0,12.5 C0,5.600000000000001,5.6,0,12.5,0 C19.4,0,25,5.6,25,12.5 Z M12.5,0 L12.5,1.61 L12.5,3.3 M6.27,1.68 L7.29,3.44 L7.92,4.54 M1.71,6.24 L3.76,7.43 L4.57,7.89 M0.04,12.48 L1.67,12.48 L3.34,12.48 M1.72,18.71 L3.58,17.64 L4.58,17.06 M6.28,23.27 L7.06,21.93 L7.94,20.41 M12.52,24.94 L12.52,22.76 L12.52,21.64 M18.75,23.26 L18.06,22.06 L17.1,20.4 M23.31,18.69 L21.63,17.72 L20.45,17.04 M24.98,12.46 L23.39,12.46 L21.68,12.46 M23.3,6.23 L21.61,7.2 L20.44,7.88 M18.74,1.67 L17.91,3.1 L17.09,4.53 M13.81,5.31 L12.3,12.5 L15.47,12.5 L19.75,12.5 L15.47,12.5 L12.3,12.5 Z "
+                        transform="translate(8,8)" visibility="visible" opacity="1" stroke="black" stroke-width="1"
+                        fill="white"></path>
+                </g>
+            </svg>
+            <svg *ngIf="node.data.shape == 'act_message'">
+                <g>
+                    <rect width="100" height="100" visibility="visible" rx="10" ry="10" opacity="1" stroke="black"
+                        stroke-width="1" stroke-dasharray="none" fill="white"></rect>
+                    <path d="M17.15,0 L9,7.41 L0.85,0 L17.15,0 Z M18,16 L0,16 L0,0.6 L9,8.79 L18,0.6 L18,16 Z "
+                        transform="translate(7,7)" visibility="visible" opacity="1" stroke="black" stroke-width="1"
+                        stroke-dasharray="none" fill="transparent"></path>
+                    <text [attr.x]="10" [attr.y]="node.dimension.height / 2" style="inline-size: 70px;" [attr.font-size]="y">
+                        {{node.label}}
+                    </text>
+                </g>
+            </svg>
+        </ng-template>
+        <ng-template #linkTemplate let-link>
+            <svg viewBox="auto auto auto auto" preserveAspectRatio="xMidYMid meet">
+                <g class="edge">
+                    <path class="line" 
+                    stroke-width="2" marker-end="url(#arrow)" />
+                    <text class="edge-label" text-anchor="middle">
+                        <textPath class="text-path" [attr.href]="'#' + link.id"
+                            [style.dominant-baseline]="link.dominantBaseline" startOffset="50%">
+                            <circle class="textbackground" r="10" stroke="black" stroke-width="2" [attr.cx]="50"
+                                [attr.cy]="50" />
+                            {{link.label}}
+                        </textPath>
+                    </text>
+                </g>
+                <g *ngFor="let path of newpath; index as i ">
+                    <circle r="10" [attr.fill]="edge[i].color">
+                        <animateMotion [attr.dur]="edge[i].delay" [attr.path]="path" repeatCount="indefinite"
+                        calcMode="linear" fill="freeze" />
+                    </circle>
+                </g>
+            </svg>
+        </ng-template>
+    </ngx-graph>
+</div>
