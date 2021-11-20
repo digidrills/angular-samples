@@ -1,0 +1,57 @@
+<button mat-button (click)="thisDialog()">Open dialog</button>
+
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Redial</span>
+    </button>
+    <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+    </button>
+    <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon>
+        <span>Disable alerts</span>
+    </button>
+</mat-menu>
+<br>
+<div><i class="fas fa-trash" aria-hidden="true"></i></div>
+
+<div class="container" (window:resize)="onResize($event)">
+    <form class="dealership-form" fxLayout="column" fxLayoutAlign="start center" (ngSubmit)="onSubmit()"
+        [formGroup]="gridForm">
+        <mat-form-field>
+            <mat-select formControlName="innings" placeholder="select innings">
+                <ng-container *ngFor="let inns of innings">
+                    <mat-option value="{{inns.innings}}">{{inns.innings}}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select formControlName="playername" placeholder="select player">
+                <ng-container *ngFor="let inst of players">
+                    <mat-option value="{{inst.playername}}">{{inst.playername}}
+                    </mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+        <ag-grid-angular style="width: 1100px; height: 130px;" class="ag-theme-alpine" [rowData]="rowData"
+            [columnDefs]="columnDefs" (gridReady)="gridReady($event)" [frameworkComponents]="getComponents()"
+            [context]="getContext()" (rowDataChanged)="refreshFormControls()">
+
+        </ag-grid-angular>
+
+
+    </form>
+    <ag-grid-angular style="width: 1100px; height: 300px;" class="ag-theme-alpine" [rowData]="rowData_1"
+        [columnDefs]="columnDefs_1" (gridReady)="ongridReady($event)"
+                                        [frameworkComponents]="getCustomComponents()"
+
+        (cellClicked)="onCellClickedEvent($event)"></ag-grid-angular>
+    <ag-grid-angular style="width: 1100px; height: 300px;" class="ag-theme-alpine" [rowData]="rowData_2"
+        [columnDefs]="columnDefs_2" (cellClicked)="onCellClicked($event)">
+    </ag-grid-angular>
+</div>
