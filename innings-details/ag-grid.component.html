@@ -1,0 +1,35 @@
+
+<a routerLink="/statistics" class="btn btn-secondary">View statistics</a>
+<br>
+<br>
+<br>
+<div><i class="fas fa-trash" aria-hidden="true"></i></div>
+
+<br>
+<button (click)= "openDialog()"></button>
+<br>
+<ag-grid-angular #agGrid id="myGrid" style="width: 1400px; height: 750px" class="ag-theme-alpine"
+    [groupIncludeTotalFooter]="groupIncludeTotalFooter" [defaultColDef]="defaultColDef"
+    [autoGroupColumnDef]="autoGroupColumnDef" [columnDefs]="columnDefs_1stIndBat" [rowData]="rowData_Ind1stBat"
+    [animateRows]="true" [rowSelection]="rowSelection" 
+    (rowClicked)="onRowClicked($event)"
+    (gridReady)="onGridReady($event)">
+</ag-grid-angular>
+<ag-grid-angular #agGrid id="myGrid" style="width: 1400px; height: 450px" class="ag-theme-alpine"
+    [defaultColDef]="defaultColDef" [autoGroupColumnDef]="autoGroupColumnDef" [columnDefs]="columnDefs_2"
+    [rowData]="rowData_Eng1stBowl">
+</ag-grid-angular>
+<br>
+
+<br>
+<ag-grid-angular #agGrid id="myGrid" style="width: 1400px; height: 750px" class="ag-theme-alpine"
+    [defaultColDef]="defaultColDef" [autoGroupColumnDef]="autoGroupColumnDef" [columnDefs]="columnDefs_2ndIndBat"
+    [rowData]="rowData_Ind2ndBat">
+</ag-grid-angular>
+<ag-grid-angular #agGrid id="myGrid" style="width: 1400px; height: 470px" class="ag-theme-alpine"
+    [defaultColDef]="defaultColDef" [autoGroupColumnDef]="autoGroupColumnDef" [columnDefs]="columnDefs_2"
+    [rowData]="rowData_Eng2ndBowl">
+</ag-grid-angular>
+<button (click)="getSelectedRows()">Get Selected Rows</button>
+<p id="selectedRow"></p>
+<button (click)="updateCell()">update cell</button>
