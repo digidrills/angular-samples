@@ -1,0 +1,183 @@
+batsmanForm{{batsmanForm.value | json}}<br>bowlerForm{{bowlerForm.value | json}}
+<br>
+<div style="border: 2px solid grey; padding: 100px; margin: 60px;">
+    <mat-toolbar colour="warn">Batsman Form</mat-toolbar>
+    <br>
+    <form [formGroup]="batsmanForm" (ngSubmit)="onSubmit()">
+        <mat-tab-group>
+            <mat-tab label="Innings">
+
+                <mat-form-field>
+                    <mat-select formControlName="innings" placeholder="select innings">
+                        <ng-container *ngFor="let inns of innings">
+                            <mat-option value="{{inns.innings}}">{{inns.innings}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                    <mat-error>innings* </mat-error>
+
+                </mat-form-field>
+            </mat-tab>
+
+
+                        <mat-tab label="Player name">
+
+            <mat-form-field>
+                <mat-select formControlName="playername" placeholder="select player">
+                    <ng-container *ngFor="let inst of players">
+                        <mat-option value="{{inst.playername}}">{{inst.playername}}
+                        </mat-option>
+                    </ng-container>
+                </mat-select>
+                <mat-error>player name*</mat-error>
+            </mat-form-field>
+        </mat-tab>
+
+
+            <mat-tab label="Runs">
+
+            <mat-form-field>
+                <input type="number" matInput formControlName="runs" placeholder="enter runs">
+                <mat-error>this field is required</mat-error>
+
+            </mat-form-field>
+</mat-tab>
+
+            <br>
+                        <mat-tab label="Balls faced">
+
+            <mat-form-field>
+                <input type="number" matInput formControlName="balls" placeholder="balls faced">
+                <mat-error>this field is required</mat-error>
+
+            </mat-form-field>
+            </mat-tab>
+
+            <br>
+<mat-tab label="Fours">
+
+            <mat-form-field>
+                <input type="number" matInput formControlName="fours" placeholder="4s">
+                <mat-error>this field is required</mat-error>
+
+            </mat-form-field>
+            </mat-tab>
+
+
+            <br>
+                                    <mat-tab label="sixes">
+
+            <mat-form-field>
+
+                <input type="number" matInput formControlName="sixes" placeholder="6s">
+                <mat-error>this field is required</mat-error>
+            </mat-form-field>
+            </mat-tab>
+        </mat-tab-group>
+
+                <br>
+                <div>
+                    <button mat-raised-button color="primary" [disabled]="batsmanForm.invalid">addrecord</button>
+                            <a routerLink="/ag-grid" id="link" class="btn btn-link" style="margin-left: 20px;">view added records</a>
+
+                </div>
+            </form>
+
+<br>
+
+
+    <mat-toolbar colour="warn">Bowler Form</mat-toolbar>
+
+    <form [formGroup]="bowlerForm" (ngSubmit)="addBowler()">
+        <br>
+        <mat-tab-group>
+
+            <mat-tab label="Innings">
+
+                <mat-form-field>
+                    <mat-select formControlName="innings" placeholder="select innings">
+                        <ng-container *ngFor="let inns of innings">
+                            <mat-option value="{{inns.innings}}">
+                                {{inns.innings}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                    <mat-error>field required*</mat-error>
+
+                </mat-form-field>
+            </mat-tab>
+
+
+            <br>
+
+            <mat-tab label="Player name">
+
+                <mat-form-field>
+                    <mat-select formControlName="playername" placeholder="select player">
+                        <ng-container *ngFor="let name of players">
+                            <mat-option value="{{name.playername}}">
+                                {{name.playername}}
+                            </mat-option>
+                        </ng-container>
+                    </mat-select>
+                    <mat-error>field required*</mat-error>
+
+                </mat-form-field>
+            </mat-tab>
+
+
+            <br>
+
+            <mat-tab label="Overs bowled">
+
+                <mat-form-field>
+                    <input type="number" matInput formControlName="overs" placeholder="overs bowled">
+                    <mat-error>field required</mat-error>
+
+                </mat-form-field>
+            </mat-tab>
+
+
+            <br>
+
+            <mat-tab label="Maidens">
+
+                <mat-form-field>
+                    <input type="number" matInput formControlName="maidens" placeholder="maidens">
+                    <mat-error>field required</mat-error>
+
+                </mat-form-field>
+            </mat-tab>
+
+
+            <br>
+
+            <mat-tab label="Runs conceded">
+
+                <mat-form-field>
+                    <input type="number" matInput formControlName="runs" placeholder="runs conceded">
+                    <mat-error>field required</mat-error>
+
+                </mat-form-field>
+            </mat-tab>
+
+
+            <br>
+
+            <mat-tab label="Wickets">
+
+                <mat-form-field>
+                    <input type="number" matInput formControlName="wicket" placeholder="wicket">
+                    <mat-error>field required</mat-error>
+                </mat-form-field>
+            </mat-tab>
+
+
+        </mat-tab-group>
+        <br>
+        <div>
+            <button type="submit" class="btn btn-primary" [disabled]="bowlerForm.invalid">addRecord</button>
+            <a routerLink="/ag-grid" id="link" class="btn btn-link" style="margin-left: 20px;">view added records</a>
+        </div>
+
+    </form>
+
+</div>
