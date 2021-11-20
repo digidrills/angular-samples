@@ -1,0 +1,15 @@
+
+<h2 mat-dialog-title>Comparision graph</h2>
+<div mat-dialog-content class="mat-typography" style="width: 1000px; height: 1000px;">
+    <h3></h3>
+
+        <div class="d3-chart" #chart></div>
+        <svg width=500 height=500 stroke="black" id="svg">
+        </svg>
+
+</div>
+<div mat-dialog-actions align="end">
+
+    <button mat-button (click)="onNoClick()">Close</button>
+
+</div>
