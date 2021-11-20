@@ -1,0 +1,15 @@
+<div style=" width: 50px;float: left;">
+    <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="columnDef"
+        aria-label="Example icon-button with a menu">
+        <mat-icon s>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <ng-template matMenuContent>
+            <button mat-menu-item *ngFor="let item of columnDef; let i = index" 
+            [hidden]="item.action === true"
+            >
+                {{item.field}}
+            </button>
+        </ng-template>
+    </mat-menu>
+</div>
