@@ -1,0 +1,18 @@
+<div style=" width: 50px;float: left;">
+    <button mat-icon-button 
+        aria-label="Example icon-button with a menu" [matMenuTriggerFor]="menu">
+        <i class="fa fa-bars"></i>
+
+  </button>
+    <mat-menu #menu="matMenu">
+        <ng-template matMenuContent>
+        
+            <button mat-menu-item *ngFor="let item of rowData ; let i = index" (click)="simpleFunction()"
+            >
+        
+                {{item.send_approval}}
+            </button>
+        </ng-template>
+    </mat-menu>
+
+    </div>
