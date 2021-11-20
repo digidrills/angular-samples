@@ -1,0 +1,11 @@
+.div-left{
+    margin-top: 100px;
+    float: left;
+    width: 70%;
+}
+.div-right{
+    margin-top: 100px;
+    float: right;
+    padding-right: 50px;
+    
+}

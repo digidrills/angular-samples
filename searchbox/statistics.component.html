@@ -1,0 +1,77 @@
+
+<div class="newcontainer">
+    <div class="div-left">
+
+        <mat-chip-list>
+            <mat-chip *ngFor="let item of finalContainer" [removable]="remove">
+
+                {{item.label}}: &nbsp;{{item.value}}
+                <div *ngIf="item.label == 'daterange'">
+                    From &nbsp;{{ item.value1 | date:'dd/MM/yyyy'}}&nbsp;To&nbsp;
+                    {{item.value2 | date:'dd/MM/yyyy'}}
+
+                </div>
+                <mat-icon *ngIf="remove" matChipRemove (click)="removeChip_(item)">
+                    cancel
+                </mat-icon>
+
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+
+
+    <div class="div-right" style="width: 500px;">
+
+
+        <mat-form-field style="width:100% !important;" id="containerfield" appearance="outline" placeholder="search">
+            <mat-label>search</mat-label>
+            <mat-select [(ngModel)]="instance" (keyup.enter)="selectedOption()" >
+
+                <mat-select-trigger>
+
+                    <div *ngFor="let list of searchContainer" (click)="$event.stopPropagation();"
+                        (keyup.enter)="onEnter() ">
+                        <div *ngIf="list.label == 'contains'">
+                            {{list.label}}: &nbsp;&nbsp;
+                            <input type="text" [(ngModel)]="contains" (keydown)="$event.stopPropagation()"             #inputcontains>
+                        </div>
+                        <div *ngIf="list.label == 'daterange'">
+                            From:&nbsp; <input type="date" [(ngModel)]="fromdate" (keydown)="$event.stopPropagation()"
+                                #inputfrom>
+                            To:&nbsp;<input type="date" [(ngModel)]="todate" (keydown)="$event.stopPropagation()"
+                                #inputto>
+
+                        </div>
+                        <div *ngIf="list.label == 'status'" (click)="$event.stopImmediatePropagation();"
+                            (keydown)="$event.stopImmediatePropagation();">
+                            {{list.label}}:&nbsp;&nbsp;
+
+
+                            <select [(ngModel)]="status" (keydown.enter)="$event.preventDefault()"
+                                (keydown.pagedown)="$event.preventDefault()" (keydown.pageup)="$event.preventDefault()"
+                                (keyup.enter)="onEnter()" #inputstatus>
+                                <option value="draft">draft</option>
+                                <option value="await">await</option>
+                                <option value="open">open</option>
+                                <option value="verify">verify</option>
+                                <option value="locked">locked</option>
+                                <option value="closed">closed</option>
+                                <option value="cancel">cancel</option>
+                            </select>
+                        </div>
+                        <div *ngIf="list.label == 'tags'">
+                            {{list.label}}:&nbsp;&nbsp;
+                            <input type="text" [(ngModel)]="tags" (keydown)="$event.stopPropagation()" #inputtags>
+                        </div>
+                    </div>
+                </mat-select-trigger>
+
+                <mat-option *ngFor="let item of searchRequirements" [value]="item" (click)="selectedOption()">
+                    <span>{{item.label}}:&nbsp;&nbsp;</span>
+                    <span style="color: gray;">{{item.description}}</span>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+</div>
